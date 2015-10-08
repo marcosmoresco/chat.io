@@ -1,0 +1,6 @@
+[submodule "lib/sass/vendor/switch"]
+	path = lib/sass/vendor/switch
+	url = https://github.com/ajkochanowicz/switch.git
+[submodule "lib-docs/sass/vendor/switch"]
+	path = lib-docs/sass/vendor/switch
+	url = https://github.com/ajkochanowicz/switch.git

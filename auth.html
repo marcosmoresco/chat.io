@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <title>ArkHam chat</title>
+    <link rel="stylesheet" href="./node_modules/kickstart-node/css/kickstart.css" />
+  </head>
+  <body>
+    <h1 style="text-align:center">ArkHam Chat</h1>
+
+    <div class="container" style="margin-left: 20%;margin-right: 20%;background: #EDEDED;">
+      <!--<header>New message</header>  -->
+      <main style="height:300px;">
+        <form action="/auth" method="post" style="margin-top: 100px;text-align:center;">
+          <p>Please type in your nickname and press enter.</p>
+          <input type="text" style="width: 300px;margin-left: 31%;" name="nickname" class="input-nickname" />
+        </form>
+      </main>
+    </div>
+  </body>
+  <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+
+      $('form').submit(function(){
+
+        $.ajax({
+          type: "POST",
+          url: "/auth", //the name and location of your php file
+          data: {nickname : $('.input-nickname').val() } ,      //add the converted json string to a document.
+          success: function() {
+
+             socket.emit('nickname', $('.input-nickname').val());
+             $('.input-nickname').val('');
+             location.reload();
+          } //just to make sure it got to this point.
+        });
+
+        return false;
+      });
+
+      socket.on('chat message', function(msg){
+          $('#messages').append($('<li>').text(msg));
+           $('#messages').get(0).scrollTop = 10000000;
+      });
+
+  </script>
+  </body>
+</html>
