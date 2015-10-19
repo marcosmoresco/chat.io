@@ -23,7 +23,7 @@ app.get('/', function(req, res) {
 
   if (!!req.session.logged) {
     user = req.session.nickname;
-    console.log('user ' + user);
+    console.log('user name' + user);
     res.sendFile(__dirname + '/index.html');
   } else {
     res.sendFile(__dirname + '/auth.html');
